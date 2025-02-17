@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.routes.js";
 import todoRouter from "./routes/todo.routes.js";
 import cookieParser from "cookie-parser";
 import connectToDatabase from "./lib/database.js";
+import cors from "cors";
 
 //creating the server
 const app=express();
@@ -13,6 +14,13 @@ const port = process.env.PORT || 5000
 
 
 //middlewares 
+app.use(
+    cors({
+      origin: true,
+      methods: ["GET", "POST", "DELETE", "PUT"],
+      credentials: true,
+    })
+  );
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/v1/auth",authRouter);
